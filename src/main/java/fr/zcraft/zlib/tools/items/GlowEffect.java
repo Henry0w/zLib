@@ -31,6 +31,7 @@ package fr.zcraft.zlib.tools.items;
 
 import fr.zcraft.zlib.tools.PluginLogger;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.enchantments.EnchantmentWrapper;
@@ -51,9 +52,9 @@ public class GlowEffect extends EnchantmentWrapper {
 	private final static String ENCHANTMENT_NAME = "GlowEffect";
 	private static Enchantment glow;
 
-	protected GlowEffect(int id) {
+	protected GlowEffect() {
 
-		super(id);
+		super(ENCHANTMENT_NAME);
 
 	}
 
@@ -65,33 +66,6 @@ public class GlowEffect extends EnchantmentWrapper {
 	private static Enchantment getGlow() {
 		if (glow != null) {
 			return glow;
-		}
-
-		try {
-			// We change this to force Bukkit to accept a new enchantment.
-			// Thanks to Cybermaxke on BukkitDev.
-			Field acceptingNewField = Enchantment.class.getDeclaredField("acceptingNew");
-			acceptingNewField.setAccessible(true);
-			acceptingNewField.set(null, true);
-		} catch (Exception e) {
-			PluginLogger.error("Unable to re-enable enchantments registrations", e);
-		}
-
-		try {
-			try {
-				glow = new GlowEffect(ENCHANTMENT_ID);
-				Enchantment.registerEnchantment(glow);
-			} catch (NoSuchMethodError e) {
-				// 1.13+
-
-			}
-
-		} catch (IllegalArgumentException e) {
-			// If the enchantment is already registered - happens on server
-			// reload
-			glow = Enchantment.getById(ENCHANTMENT_ID); // getByID required - by
-														// name it doesn't work
-														// (returns null).
 		}
 
 		return glow;

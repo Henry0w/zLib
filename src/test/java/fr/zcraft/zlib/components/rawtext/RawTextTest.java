@@ -31,7 +31,6 @@
 package fr.zcraft.zlib.components.rawtext;
 
 import junit.framework.Assert;
-import org.bukkit.Achievement;
 import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
 import org.json.simple.JSONObject;
@@ -169,16 +168,6 @@ public class RawTextTest
         RawText textSuggest = new RawText("test")
             .suggest("hello");
         assertJSON(textSuggest, SUGGEST_TEST);
-    }
-    
-    @Test
-    public void hoverAchievementTest()
-    {
-        final String HOVER_ACHIEVEMENT_TEST = "{\"text\":\"test\",\"hoverEvent\":{\"action\":\"show_achievement\",\"value\":\"achievement.theEnd\"}}";
-        RawText text = new RawText("test")
-            .hover(Achievement.END_PORTAL);
-        
-        assertJSON(text, HOVER_ACHIEVEMENT_TEST);
     }
     
     @Test

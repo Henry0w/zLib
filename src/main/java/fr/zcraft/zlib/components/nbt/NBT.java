@@ -117,46 +117,6 @@ public abstract class NBT
     }
     
     /**
-     * Returns an NBT-like representation of the specified enchantments.
-     * It is useful as a fallback if you need item data as an NBT format, but
-     * the actual NBT couldn't be retrieved for some reason.
-     *
-     * @param enchants the enchantment list to get the data from.
-     * @return an NBT-like representation of the specified enchantments.
-     */
-    static public List<Map<String, Object>> fromEnchantments(Map<Enchantment, Integer> enchants)
-    {
-        List<Map<String, Object>> enchantList = new ArrayList<>();
-        
-        for (Map.Entry<Enchantment, Integer> enchantment : enchants.entrySet())
-        {
-            final Map<String, Object> enchantmentData = new HashMap<>();
-
-            if (MinecraftVersion.get() == MinecraftVersion.VERSION_1_12_2_OR_OLDER)
-            {
-                enchantmentData.put("id", enchantment.getKey().getId());
-            }
-            else
-            {
-                final Enchantment enchant = enchantment.getKey();
-                try
-                {
-                    enchantmentData.put("id", Reflection.call(enchant, "getKey").toString());
-                }
-                catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e)
-                {
-                    enchantmentData.put("id", enchant.getName());
-                }
-            }
-
-            enchantmentData.put("lvl", enchantment.getValue());
-            enchantList.add(enchantmentData);
-        }
-        
-        return enchantList;
-    }
-    
-    /**
      * Returns an NBT-like representation of the item flags (HideFlags).
      * It is useful as a fallback if you need item data as an NBT format, but
      * the actual NBT couldn't be retrieved for some reason.

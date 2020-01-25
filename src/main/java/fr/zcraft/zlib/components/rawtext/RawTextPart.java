@@ -37,7 +37,6 @@ import fr.zcraft.zlib.components.commands.Commands;
 import fr.zcraft.zlib.tools.PluginLogger;
 import fr.zcraft.zlib.tools.items.ItemUtils;
 import fr.zcraft.zlib.tools.reflection.NMSException;
-import org.bukkit.Achievement;
 import org.bukkit.ChatColor;
 import org.bukkit.Statistic;
 import org.bukkit.entity.Entity;
@@ -312,19 +311,6 @@ public abstract class RawTextPart<T extends RawTextPart<T>> implements Iterable<
     private String enumCamel(Enum enumValue)
     {
         return CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, enumValue.toString());
-    }
-
-    /**
-     * Adds an hover achievement to this component.
-     *
-     * @param achievement The achievement to display on hover.
-     * @return The current raw text component, for method chaining.
-     * @deprecated Future Minecraft versions does not support achievements (they use advancements instead).
-     */
-    @Deprecated
-    public T hover(Achievement achievement)
-    {
-        return hover(ActionHover.SHOW_ACHIEVEMENT, "achievement." + RawText.getI18nKey(achievement));
     }
 
     /**
