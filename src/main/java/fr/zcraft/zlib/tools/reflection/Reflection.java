@@ -484,8 +484,10 @@ public final class Reflection
     {
         for(Constructor constructor: hClass.getDeclaredConstructors())
         {
-            if(constructor.getParameterTypes().length == parameterCount)
+            if(constructor.getParameterTypes().length == parameterCount) {
+                constructor.setAccessible(true);
                 return constructor;
+            }
         }
         return null;
     }
