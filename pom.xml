@@ -38,44 +38,32 @@
 	<groupId>fr.zcraft</groupId>
 	<artifactId>zlib</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-
-	<packaging>jar</packaging>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.9</maven.compiler.source>
-		<maven.compiler.target>1.9</maven.compiler.target>
-	</properties>
-	
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
+				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<links>
-						<link>https://hub.spigotmc.org/javadocs/bukkit/</link>
-					</links>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
 	<repositories>
 		<repository>
-			<id>spigot-repo</id>
-			<url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
-		</repository>
+            <id>spigotmc-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
 	</repositories>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.bukkit</groupId>
-			<artifactId>bukkit</artifactId>
-			<version>1.15.1-R0.1-SNAPSHOT</version>
-		</dependency>
-
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.15.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
 		<!--
 			TEMP DEPENDENCY: it was removed from Bukkit dependencies in 1.14, but is still available at runtime.
 			It is used by RawTextPart (implements JSONAware); TODO check if it's really needed.
@@ -93,42 +81,4 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
-	<profiles>
-		<profile>
-			<id>doclint-java8-disable</id>
-			<activation>
-				<jdk>[1.8,)</jdk>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<configuration>
-							<!--<additionalparam>-Xdoclint:none</additionalparam>-->
-							<failOnError>false</failOnError>
-						</configuration>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-site-plugin</artifactId>
-						<version>3.3</version>
-						<configuration>
-							<reportPlugins>
-								<plugin>
-									<groupId>org.apache.maven.plugins</groupId>
-									<artifactId>maven-javadoc-plugin</artifactId>
-									<configuration>
-										<!--<additionalparam>-Xdoclint:none</additionalparam>-->
-										<failOnError>false</failOnError>
-									</configuration>
-								</plugin>
-							</reportPlugins>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
